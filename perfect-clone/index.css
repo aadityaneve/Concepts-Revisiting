@@ -1,0 +1,10 @@
+#navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+#left,
+#middle,
+#right {
+  display: flex;
+}
