@@ -1,10 +1,146 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    margin: auto;
+}
+
+body {
+    font-size: 100%;
+    font-family: Proxima Nova Regular, Helvetica Neue, Helvetica, Arial,
+        sans-serif;
+    background-color: #171544;
+    color: rgb(255, 255, 255);
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    margin: auto;
+}
+
 #navbar {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-evenly;
+
+    padding: 5px;
 }
 
 #left,
 #middle,
 #right {
-  display: flex;
+    display: flex;
+
+    align-items: center;
 }
+
+#left > * {
+    cursor: pointer;
+}
+
+#right {
+    gap: 5px;
+}
+
+#right > * {
+    cursor: pointer;
+}
+
+.logo {
+    width: 100%;
+    margin-right: 10px;
+}
+
+#middleInputBox {
+    background: hsla(0, 0%, 100%, 0.25);
+    border: 1px solid transparent;
+    padding: 0px 0px 0px 10px;
+    border-radius: 3px;
+    width: 100%;
+    outline: 0 none;
+    opacity: 0.8;
+    min-height: 36px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: #fff;
+}
+
+.inputFrom {
+    position: relative;
+
+    width: 35%;
+}
+
+.searchBtn {
+    position: absolute;
+    font-size: 20px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto auto auto auto;
+    background: transparent;
+    color: #fff;
+    border: 0;
+    outline: 0 none;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.avatar {
+    color: white;
+}
+
+.newPost {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    border-radius: 3px;
+    padding: 4px;
+    width: 100%;
+
+    color: white;
+    background-color: #1bb76e;
+}
+
+#exploreTags {
+    width: 90%;
+
+    display: flex;
+}
+
+#cardsDiv {
+    width: 80vw;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+/* #cardsDiv > div {
+    padding: 5px;
+} */
+
+.heading {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#div1,
+#div2,
+#div3,
+#div4 {
+    display: flex;
+    flex-direction: column;
+    vertical-align: top;
+    justify-items: flex-start;
+    margin: 15px 0px;
+}
+/* #div1,
+#div2,
+#div3,
+#div4 {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    vertical-align: top;
+    margin: 15px 0px;
+} */
