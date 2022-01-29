@@ -1,3 +1,4 @@
+let allData;
 (() => {
     let myHeaders = new Headers();
     myHeaders.append('Authorization', 'Client-ID a61cccb1bbe1c01');
@@ -15,10 +16,10 @@
     )
         .then((response) => response.json())
         .then((result) => {
-            let data = result.data.filter((d) =>
+            allData = result.data.filter((d) =>
                 d.images?.[0]?.type ? d : null
             );
-            displayCards(data);
+            displayCards(allData);
         })
         .catch((error) => console.log('error', error));
 })();
@@ -29,12 +30,12 @@ let div3 = document.getElementById('div3');
 let div4 = document.getElementById('div4');
 
 function displayCards(data) {
-    // console.log(data);
-    console.log(data);
-
+    div1.innerHTML = null;
+    div2.innerHTML = null;
+    div3.innerHTML = null;
+    div4.innerHTML = null;
     let cardsDiv = document.getElementById('cardsDiv');
     data.forEach((card, i) => {
-        console.log('card:', card);
         let div = document.createElement('div');
         div.setAttribute(
             'style',
@@ -49,7 +50,6 @@ function displayCards(data) {
         let img = document.createElement('img');
         let video = document.createElement('video');
         let source = document.createElement('source');
-        console.log('card.type:', card.images?.[0].type);
         if (card?.images[0]?.type == 'image/jpeg') {
             img.src = card.images?.[0]?.link;
             img.setAttribute('style', 'width: 220px');
@@ -118,6 +118,45 @@ function displayCards(data) {
         }
         // cardsDiv.append(div);
     });
+}
+
+function matchString(element, middleInputBox) {
+    for (let i = 0; i < element.tags.length; i++) {
+        if (element.tags[i].name.toLowerCase().includes(middleInputBox, 0)) {
+            return true;
+        }
+        /*  if (
+            element.tags[i].name.toLowerCase() == middleInputBox.trim().toLowerCase()
+        ) {
+            return true;
+        } */
+    }
+    return false;
+}
+
+function search() {
+    let middleInputBox = document.getElementById('middleInputBox').value;
+
+    if (middleInputBox.length < 2) {
+        return false;
+    }
+
+    let newData = allData.filter((element) => {
+        let bool = matchString(element, middleInputBox);
+        return bool;
+    });
+    console.log('newData:', newData);
+    displayCards(newData);
+}
+let timer;
+function debounce(search, delay) {
+    if (timer) {
+        clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+        search();
+    }, delay);
 }
 
 /* (() => {

@@ -17,10 +17,13 @@ body {
 }
 
 #navbar {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
 
     padding: 5px;
+    background: linear-gradient(to top, transparent 0%, black 100%);
 }
 
 #left,
@@ -105,6 +108,7 @@ body {
     width: 90%;
 
     display: flex;
+    margin-top: 15px;
 }
 
 #cardsDiv {
@@ -120,7 +124,7 @@ body {
 } */
 
 .heading {
-    margin-top: 15px;
+    padding-top: 60px;
     text-align: center;
 }
 

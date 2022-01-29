@@ -60,11 +60,12 @@
                     </div>
                 </div>
 
-                <form action="" class="inputFrom">
+                <div class="inputFrom">
                     <input
                         id="middleInputBox"
                         type="text"
                         placeholder="Images, #tags, @users oh my!"
+                        oninput="debounce(search, 1000)"
                     />
                     <button class="searchBtn">
                         <img
@@ -72,7 +73,7 @@
                             src="https://s.imgur.com/desktop-assets/desktop-assets/icon-search.8d0f9b564a4659d48d8eca38b968a7f2.svg"
                         />
                     </button>
-                </form>
+                </div>
 
                 <div id="right">
                     <!-- Go Add Free Button - Start -->
@@ -163,7 +164,7 @@
         </header>
 
         <h2 class="heading">Discover the magic of the Internet</h2>
-        <div id="exploreTags">Explore Tags</div>
+        <div id="exploreTags"></div>
 
         <div id="cardsDiv">
             <div id="div1"></div>
