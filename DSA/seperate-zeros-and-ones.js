@@ -33,6 +33,7 @@ function seperateZerosAndOnes(arr) {
     } */
 
     /* Approach-3: Two Pointer */
+    /* TC: O(N), SC: O(1) */
     let start = 0;
     let end = arr.length - 1;
     while (start < end) {
