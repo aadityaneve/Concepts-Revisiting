@@ -2,13 +2,13 @@ function equilibiriumIndexOfAnArray(arr) {
     let k = 2;
     k = k % arr.length;
     /* Approach-1: Brute Force :: TC: O(N), O(K) */
-    /* for (let i = 0; i < k; i++) {
-        arr.push(arr.shift());
+    for (let i = arr.length - 1; i >= arr.length - k; i--) {
+        arr.unshift(...arr.splice(arr.length - 1, 1));
     }
-    return arr; */
+    return arr;
 
     /* Approach-2: Two Pointers :: TC: O(N), SC: O(1)  */
-    function swap(arr, i, j) {
+    /* function swap(arr, i, j) {
         let temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -28,9 +28,7 @@ function equilibiriumIndexOfAnArray(arr) {
     reverse(arr, k, arr.length - 1);
     reverse(arr, 0, arr.length - 1);
 
-    return arr;
-
-    /* Approach-3:  ::  */
+    return arr; */
 }
 
 function runProgram(input) {
