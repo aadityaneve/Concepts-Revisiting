@@ -1,17 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>HTML CSS Explanation</title>
-</head>
-<body>
-    
-    <div id="main">
-        <h1>HELLOO</h1>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>HTML CSS Explanation</title>
+        <style>
+            .wrapper {
+                display: grid;
+                grid-template-columns: 70% 30%;
+                /* column-gap: 1em;
+                row-gap: 1em; */
+                gap: 1em 1em;
+            }
 
-</body>
+            .wrapper > div {
+                background-color: whitesmoke;
+                padding: 1em;
+            }
+
+            .wrapper > div:nth-child(odd) {
+                background: #ddd;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste
+                ab, fugit repudiandae enim quas tenetur eaque recusandae impedit
+                officia iusto quasi ipsam laborum doloribus est reprehenderit
+                commodi, cupiditate maxime eligendi ea. Beatae dolores magnam
+                eveniet blanditiis rem architecto sunt nihil id aspernatur
+                ducimus, enim quibusdam. Illo blanditiis qui ipsa quasi nostrum
+                obcaecati, nesciunt alias culpa laudantium ducimus debitis
+                cupiditate. Quia similique quam error delectus assumenda rerum,
+                odit molestiae reiciendis ad blanditiis harum architecto, sint
+                unde repellat sapiente, eaque facilis vel?
+            </div>
+            <div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                numquam ipsum fuga recusandae unde natus sunt iure inventore
+                deleniti iste voluptatibus quae consectetur, dolores nobis optio
+                omnis laboriosam, dolore molestiae.
+            </div>
+            <div>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste
+                ab, fugit repudiandae enim quas tenetur eaque recusandae impedit
+                officia iusto quasi ipsam laborum doloribus est reprehenderit
+                commodi, cupiditate maxime eligendi ea. Beatae dolores magnam
+                eveniet blanditiis rem architecto sunt nihil id aspernatur
+                ducimus, enim quibusdam. Illo blanditiis qui ipsa quasi nostrum
+                obcaecati, nesciunt alias culpa laudantium ducimus debitis
+                cupiditate. Quia similique quam error delectus assumenda rerum,
+                odit molestiae reiciendis ad blanditiis harum architecto, sint
+                unde repellat sapiente, eaque facilis vel?
+            </div>
+            <div>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                numquam ipsum fuga recusandae unde natus sunt iure inventore
+                deleniti iste voluptatibus quae consectetur, dolores nobis optio
+                omnis laboriosam, dolore molestiae.
+            </div>
+        </div>
+    </body>
 </html>
