@@ -84,8 +84,8 @@ const Comments = ({ comment }) => {
             };
             allComments.push({ ...obj, padding });
             if (x.replies?.length > 0) {
-                createRecusiveView(x.replies, (padding += 25));
-                padding -= 25;
+                createRecusiveView(x.replies, (padding += 40));
+                padding -= 40;
             }
         }
     };
