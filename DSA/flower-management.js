@@ -1,6 +1,23 @@
 function flowerManagement(arr, K) {
     // console.log('arr:', arr)
-    let count = K;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (K === 0) return 0;
+        if (arr[i] === 1) continue;
+        if (i === 0 && arr[i + 1] === 0) {
+            arr[i] = 1;
+            K--;
+        } else if (i === arr.length - 1 && arr[i - 1] === 0) {
+            arr[i] = 1;
+            K--;
+        } else if (arr[i - 1] === 0 && arr[i + 1] === 0) {
+            arr[i] = 1;
+            K--;
+        }
+    }
+    return K;
+
+    /* let count = K;
     let index = 0;
     while (index < arr.length) {
         if (index === 0) {
@@ -26,7 +43,7 @@ function flowerManagement(arr, K) {
         }
         index++;
     }
-    return count;
+    return count; */
 }
 
 function runProgram(input) {
@@ -36,7 +53,7 @@ function runProgram(input) {
         let [size, K] = input[++lines].trim().split(' ').map(Number);
         let arr = input[++lines].trim().split(' ').map(Number);
         let ans = flowerManagement(arr, K);
-        if (ans) {
+        if (ans != 0) {
             console.log('No');
         } else {
             console.log('Yes');
