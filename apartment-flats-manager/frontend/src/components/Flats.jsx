@@ -10,6 +10,9 @@ import SnackBar from './SnackBar';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
+import MultipleSelect from './MultipleSelect';
+import SortToggleButton from './SortToggleButton';
+
 const Flats = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [error, setError] = useState('');
@@ -17,9 +20,30 @@ const Flats = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
 
+    const [residentType, setResidentType] = useState([]);
+    const [sortType, setSortType] = useState('');
+
     useEffect(() => {
+        getAllFlats(residentType);
+    }, [page, residentType, sortType]);
+
+    function getAllFlats(residentType) {
         axios
-            .get(`${BASE_URL}/flat?page=${page}&limit=${4}`)
+            .get(
+                `${BASE_URL}/flat?page=${page}&limit=${4}${
+                    residentType === 'Owner'
+                        ? '&type=owner'
+                        : residentType === 'Tenant'
+                        ? '&type=tenant'
+                        : null
+                }${
+                    sortType === 'asc'
+                        ? '&sort=asc'
+                        : sortType === 'dec'
+                        ? '&sort=dec'
+                        : null
+                }`
+            )
             .then((response) => {
                 // console.log(response.data);
                 setFlats(response.data.flat);
@@ -30,7 +54,7 @@ const Flats = () => {
                 console.log(error.message);
                 setError(error.message);
             });
-    }, [page]);
+    }
 
     const handlePage = (e) => {
         setPage(Number(e.target.innerText));
@@ -60,6 +84,13 @@ const Flats = () => {
             ) : error ? (
                 <SnackBar success={false} message={error} />
             ) : null}
+
+            <MultipleSelect
+                residentType={residentType}
+                setResidentType={setResidentType}
+                setPage={setPage}
+            />
+            <SortToggleButton setSortType={setSortType} />
 
             <Box style={classes.cards}>
                 {flats.map((flat) => (

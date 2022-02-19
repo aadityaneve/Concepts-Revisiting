@@ -17,40 +17,44 @@ const MenuProps = {
     },
 };
 
-const names = ['Owner', 'Tenant'];
+const names = ['All', 'Owner', 'Tenant'];
 
-function getStyles(name, personName, theme) {
+function getStyles(name, residentType, theme) {
     return {
         fontWeight:
-            personName.indexOf(name) === -1
+            residentType.indexOf(name) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
     };
 }
 
-export default function MultipleSelect() {
+export default function MultipleSelect({
+    residentType,
+    setResidentType,
+    setPage,
+}) {
     const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
 
     const handleChange = (event) => {
         const {
             target: { value },
         } = event;
-        setPersonName(
+        setResidentType(
             // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value
+            typeof value === 'string' ? value : value
         );
+        setPage(1);
     };
 
     return (
         <div>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id='demo-multiple-name-label'>Name</InputLabel>
+                <InputLabel id='demo-multiple-name-label'>Type</InputLabel>
                 <Select
                     labelId='demo-multiple-name-label'
                     id='demo-multiple-name'
-                    multiple
-                    value={personName}
+                    // multiple
+                    value={residentType}
                     onChange={handleChange}
                     input={<OutlinedInput label='Name' />}
                     MenuProps={MenuProps}
@@ -59,7 +63,7 @@ export default function MultipleSelect() {
                         <MenuItem
                             key={name}
                             value={name}
-                            style={getStyles(name, personName, theme)}
+                            style={getStyles(name, residentType, theme)}
                         >
                             {name}
                         </MenuItem>
