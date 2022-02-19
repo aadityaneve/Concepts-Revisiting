@@ -4,13 +4,25 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import FlatResidents from './FlatResidents';
 
-export default function FlatCard({ flat, setFlatId,flatId, getFlatResidentData }) {
+export default function FlatCard({
+    flat,
+    setFlatId,
+    flatId,
+    getFlatResidentData,
+    residentsOfFlat,
+}) {
     const { picture, flat_type, flat_number, flat_in_block, user_id } = flat;
 
+    const navigate = useNavigate();
+
     const handleFlatCard = (id) => {
+        console.log('id:', id);
         setFlatId(id);
-        getFlatResidentData(flatId)
+        getFlatResidentData(id);
+        navigate(`/residents-of-flat`);
     };
 
     return (

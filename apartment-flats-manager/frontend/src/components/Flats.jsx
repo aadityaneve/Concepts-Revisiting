@@ -12,8 +12,9 @@ import Stack from '@mui/material/Stack';
 
 import MultipleSelect from './MultipleSelect';
 import SortToggleButton from './SortToggleButton';
+import { useNavigate } from 'react-router-dom';
 
-const Flats = () => {
+const Flats = ({ residentsOfFlat, setResidentsOfFlat }) => {
     const [successMessage, setSuccessMessage] = useState('');
     const [error, setError] = useState('');
     const [flats, setFlats] = useState([]);
@@ -25,8 +26,6 @@ const Flats = () => {
     const [sortType, setSortType] = useState('');
 
     const [flatId, setFlatId] = useState('');
-    const [residentsOfFlat, setResidentsOfFlat] = useState([]);
-
 
     useEffect(() => {
         getAllFlats(page, limit, residentType, sortType);
@@ -50,11 +49,9 @@ const Flats = () => {
 
     const getFlatResidentData = (flatId) => {
         axios
-            .get(
-                `${BASE_URL}/flat?flat=${flatId}`
-            )
+            .get(`${BASE_URL}/flat?flat=${flatId}`)
             .then((response) => {
-                setResidentsOfFlat(response.data.flat.user_id);                
+                setResidentsOfFlat(response.data.flat.user_id);
                 console.log('response.data.flat.user_id:', response.data.flat.user_id)
             })
             .catch((error) => {
@@ -113,6 +110,7 @@ const Flats = () => {
                         setFlatId={setFlatId}
                         flatId={flatId}
                         getFlatResidentData={getFlatResidentData}
+                        residentsOfFlat={residentsOfFlat}
                     />
                 ))}
             </Box>
