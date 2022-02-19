@@ -41,7 +41,7 @@ export default function MultipleSelect({
         } = event;
         setResidentType(
             // On autofill we get a stringified value.
-            typeof value === 'string' ? value : null
+            typeof value === 'string' && value !== 'All' ? value : ''
         );
         setPage(1);
     };

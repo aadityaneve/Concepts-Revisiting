@@ -32,6 +32,7 @@ const Flats = ({ residentsOfFlat, setResidentsOfFlat }) => {
     }, [page, limit, residentType, sortType]);
 
     const getAllFlats = (page, limit, residentType, sortType) => {
+        // console.log(`${BASE_URL}/flat?page=${page}&limit=${limit}&type=${residentType}&sort=${sortType}`)
         axios
             .get(
                 `${BASE_URL}/flat?page=${page}&limit=${limit}&type=${residentType}&sort=${sortType}`

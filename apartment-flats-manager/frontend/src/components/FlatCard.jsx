@@ -19,7 +19,6 @@ export default function FlatCard({
     const navigate = useNavigate();
 
     const handleFlatCard = (id) => {
-        console.log('id:', id);
         setFlatId(id);
         getFlatResidentData(id);
         navigate(`/residents-of-flat`);
