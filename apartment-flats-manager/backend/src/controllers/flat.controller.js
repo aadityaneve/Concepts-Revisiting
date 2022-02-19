@@ -26,6 +26,7 @@ router.get('/', async (req, res) => {
             }
 
             const flat = await Flat.findById({ _id: flatId }, { user_id: 1 })
+                .populate('user_id')
                 .lean()
                 .exec();
 
