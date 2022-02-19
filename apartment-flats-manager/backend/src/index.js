@@ -1,5 +1,7 @@
 const { start, app } = require('./server');
+const cors = require('cors');
 const express = require('express');
+app.use(cors());
 app.use(express.json());
 
 const userController = require('./controllers/user.controller');
