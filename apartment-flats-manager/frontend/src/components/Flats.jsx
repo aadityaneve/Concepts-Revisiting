@@ -19,34 +19,21 @@ const Flats = () => {
     const [flats, setFlats] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(4);
 
-    const [residentType, setResidentType] = useState([]);
-    console.log('residentType:', residentType)
-    const [sortType, setSortType] = useState('asc');
+    const [residentType, setResidentType] = useState('');
+    const [sortType, setSortType] = useState('');
 
     useEffect(() => {
-        getAllFlats(page, residentType, sortType);
-    }, [page, residentType, sortType]);
+        getAllFlats(page, limit, residentType, sortType);
+    }, [page, limit, residentType, sortType]);
 
-    const getAllFlats = (page, residentType, sortType) => {
+    const getAllFlats = (page, limit, residentType, sortType) => {
         axios
             .get(
-                `${BASE_URL}/flat?page=${page}&limit=${4}${
-                    residentType === 'Owner'
-                        ? '&type=owner'
-                        : residentType === 'Tenant'
-                        ? '&type=tenant'
-                        : null
-                }${
-                    sortType === 'asc'
-                        ? '&sort=asc'
-                        : sortType === 'dec'
-                        ? '&sort=dec'
-                        : null
-                }`
+                `${BASE_URL}/flat?page=${page}&limit=${limit}&type=${residentType}&sort=${sortType}`
             )
             .then((response) => {
-                // console.log(response.data);
                 setFlats(response.data.flat);
                 setTotalPages(response.data.total_pages);
                 setSuccessMessage(response.data.status);
@@ -55,7 +42,7 @@ const Flats = () => {
                 console.log(error.message);
                 setError(error.message);
             });
-    }
+    };
 
     const handlePage = (e) => {
         setPage(Number(e.target.innerText));
@@ -76,6 +63,10 @@ const Flats = () => {
             flexWrap: 'wrap',
             gap: '1.2em',
         },
+        buttonGroup: {
+            display: 'flex',
+            gap: '3em',
+        },
     };
 
     return (
@@ -86,12 +77,14 @@ const Flats = () => {
                 <SnackBar success={false} message={error} />
             ) : null}
 
-            <MultipleSelect
-                residentType={residentType}
-                setResidentType={setResidentType}
-                setPage={setPage}
-            />
-            <SortToggleButton setSortType={setSortType} />
+            <Box style={classes.buttonGroup}>
+                <MultipleSelect
+                    residentType={residentType}
+                    setResidentType={setResidentType}
+                    setPage={setPage}
+                />
+                <SortToggleButton setSortType={setSortType} />
+            </Box>
 
             <Box style={classes.cards}>
                 {flats.map((flat) => (
