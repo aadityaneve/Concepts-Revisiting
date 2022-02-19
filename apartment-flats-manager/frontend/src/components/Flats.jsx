@@ -21,13 +21,14 @@ const Flats = () => {
     const [page, setPage] = useState(1);
 
     const [residentType, setResidentType] = useState([]);
-    const [sortType, setSortType] = useState('');
+    console.log('residentType:', residentType)
+    const [sortType, setSortType] = useState('asc');
 
     useEffect(() => {
-        getAllFlats(residentType);
+        getAllFlats(page, residentType, sortType);
     }, [page, residentType, sortType]);
 
-    function getAllFlats(residentType) {
+    const getAllFlats = (page, residentType, sortType) => {
         axios
             .get(
                 `${BASE_URL}/flat?page=${page}&limit=${4}${

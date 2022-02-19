@@ -9,20 +9,23 @@ export default function SortToggleButton({ setSortType }) {
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
-        setSortType(alignment);
+    };
+
+    const handleClick = (value) => {
+        setSortType(value);
     };
 
     return (
         <ToggleButtonGroup
             color='primary'
-            value={alignment}
+            // value={alignment}
             exclusive
             onChange={handleChange}
         >
-            <ToggleButton value='asc'>
+            <ToggleButton onClick={() => handleClick('asc')} value='asc'>
                 <ArrowUpwardIcon fontSize='medium' />
             </ToggleButton>
-            <ToggleButton value='dec'>
+            <ToggleButton onClick={() => handleClick('des')} value='des'>
                 <ArrowDownwardIcon fontSize='medium' />
             </ToggleButton>
         </ToggleButtonGroup>

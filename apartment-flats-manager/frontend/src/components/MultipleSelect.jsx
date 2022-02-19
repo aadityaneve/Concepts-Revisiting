@@ -41,14 +41,14 @@ export default function MultipleSelect({
         } = event;
         setResidentType(
             // On autofill we get a stringified value.
-            typeof value === 'string' ? value : value
+            typeof value === 'string' ? value : null
         );
         setPage(1);
     };
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: 200 }}>
                 <InputLabel id='demo-multiple-name-label'>Type</InputLabel>
                 <Select
                     labelId='demo-multiple-name-label'
