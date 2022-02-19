@@ -38,6 +38,65 @@ router.get('/', async (req, res) => {
             }
 
             return res.status(200).send({ status: 'SUCCESS', flat });
+        } else if (page && size && flat_in_block && !filterType) {
+            const offset = (page - 1) * size;
+
+            const flat = await Flat.find({
+                flat_in_block,
+            })
+                .skip(offset)
+                .limit(size)
+                .sort({
+                    flat_number:
+                        sort === 'asc' || sort === 1
+                            ? 1
+                            : sort === 'des' || sort === -1
+                            ? -1
+                            : 1,
+                })
+                .lean()
+                .exec();
+
+            const totalPages = Math.ceil(
+                (await Flat.find({ flat_in_block })
+                    .countDocuments()
+                    .lean()
+                    .exec()) / size
+            );
+
+            return res
+                .status(200)
+                .send({ status: 'SUCCESS', flat, totalPages: totalPages });
+        } else if (page && size && flat_in_block && filterType) {
+            const offset = (page - 1) * size;
+
+            const flat = await Flat.find({
+                flat_type: filterType,
+                flat_in_block,
+            })
+                .skip(offset)
+                .limit(size)
+                .sort({
+                    flat_number:
+                        sort === 'asc' || sort === 1
+                            ? 1
+                            : sort === 'des' || sort === -1
+                            ? -1
+                            : 1,
+                })
+                .lean()
+                .exec();
+
+            const totalPages = Math.ceil(
+                (await Flat.find({ flat_type: filterType, flat_in_block })
+                    .countDocuments()
+                    .lean()
+                    .exec()) / size
+            );
+
+            return res
+                .status(200)
+                .send({ status: 'SUCCESS', flat, totalPages: totalPages });
         } else if (page && size && flat_in_block) {
             const offset = (page - 1) * size;
 
