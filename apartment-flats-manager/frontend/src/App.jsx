@@ -5,12 +5,14 @@ import Flats from './components/Flats';
 import { Routes, Route } from 'react-router-dom';
 import FlatResidents from './components/FlatResidents';
 import { useState } from 'react';
+import Navbar from './components/Navbar';
 
 function App() {
     const [residentsOfFlat, setResidentsOfFlat] = useState([]);
 
     return (
         <div className='App'>
+            {/* <Navbar /> */}
             <Routes>
                 <Route
                     path='/'

@@ -13,6 +13,7 @@ import Stack from '@mui/material/Stack';
 import MultipleSelect from './MultipleSelect';
 import SortToggleButton from './SortToggleButton';
 import { useNavigate } from 'react-router-dom';
+import SearchByBlock from './SearchByBlock';
 
 const Flats = ({ residentsOfFlat, setResidentsOfFlat }) => {
     const [successMessage, setSuccessMessage] = useState('');
@@ -27,15 +28,18 @@ const Flats = ({ residentsOfFlat, setResidentsOfFlat }) => {
 
     const [flatId, setFlatId] = useState('');
 
-    useEffect(() => {
-        getAllFlats(page, limit, residentType, sortType);
-    }, [page, limit, residentType, sortType]);
+    const [block, setBlock] = useState('');
+    // const [searchByBlock, setSearchByBlock] = useState([]);
 
-    const getAllFlats = (page, limit, residentType, sortType) => {
+    useEffect(() => {
+        getAllFlats(page, limit, residentType, sortType, block);
+    }, [page, limit, residentType, sortType, block]);
+
+    const getAllFlats = (page, limit, residentType, sortType, block) => {
         // console.log(`${BASE_URL}/flat?page=${page}&limit=${limit}&type=${residentType}&sort=${sortType}`)
         axios
             .get(
-                `${BASE_URL}/flat?page=${page}&limit=${limit}&type=${residentType}&sort=${sortType}`
+                `${BASE_URL}/flat?page=${page}&limit=${limit}&type=${residentType}&sort=${sortType}&block=${block}`
             )
             .then((response) => {
                 setFlats(response.data.flat);
@@ -53,7 +57,7 @@ const Flats = ({ residentsOfFlat, setResidentsOfFlat }) => {
             .get(`${BASE_URL}/flat?flat=${flatId}`)
             .then((response) => {
                 setResidentsOfFlat(response.data.flat.user_id);
-                console.log('response.data.flat.user_id:', response.data.flat.user_id)
+                // console.log('response.data.flat.user_id:', response.data.flat.user_id)
             })
             .catch((error) => {
                 console.log(error.message);
@@ -82,7 +86,9 @@ const Flats = ({ residentsOfFlat, setResidentsOfFlat }) => {
         },
         buttonGroup: {
             display: 'flex',
-            gap: '3em',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '2.5em',
         },
     };
 
@@ -98,6 +104,11 @@ const Flats = ({ residentsOfFlat, setResidentsOfFlat }) => {
                 <MultipleSelect
                     residentType={residentType}
                     setResidentType={setResidentType}
+                    setPage={setPage}
+                />
+                <SearchByBlock
+                    block={block}
+                    setBlock={setBlock}
                     setPage={setPage}
                 />
                 <SortToggleButton setSortType={setSortType} />
