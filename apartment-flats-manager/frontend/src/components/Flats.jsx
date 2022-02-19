@@ -24,6 +24,10 @@ const Flats = () => {
     const [residentType, setResidentType] = useState('');
     const [sortType, setSortType] = useState('');
 
+    const [flatId, setFlatId] = useState('');
+    const [residentsOfFlat, setResidentsOfFlat] = useState([]);
+
+
     useEffect(() => {
         getAllFlats(page, limit, residentType, sortType);
     }, [page, limit, residentType, sortType]);
@@ -37,6 +41,21 @@ const Flats = () => {
                 setFlats(response.data.flat);
                 setTotalPages(response.data.total_pages);
                 setSuccessMessage(response.data.status);
+            })
+            .catch((error) => {
+                console.log(error.message);
+                setError(error.message);
+            });
+    };
+
+    const getFlatResidentData = (flatId) => {
+        axios
+            .get(
+                `${BASE_URL}/flat?flat=${flatId}`
+            )
+            .then((response) => {
+                setResidentsOfFlat(response.data.flat.user_id);                
+                console.log('response.data.flat.user_id:', response.data.flat.user_id)
             })
             .catch((error) => {
                 console.log(error.message);
@@ -88,7 +107,13 @@ const Flats = () => {
 
             <Box style={classes.cards}>
                 {flats.map((flat) => (
-                    <FlatCard key={flat._id} flat={flat} />
+                    <FlatCard
+                        key={flat._id}
+                        flat={flat}
+                        setFlatId={setFlatId}
+                        flatId={flatId}
+                        getFlatResidentData={getFlatResidentData}
+                    />
                 ))}
             </Box>
             <Box>

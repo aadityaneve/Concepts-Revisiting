@@ -5,11 +5,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-export default function FlatCard({ flat }) {
+export default function FlatCard({ flat, setFlatId,flatId, getFlatResidentData }) {
     const { picture, flat_type, flat_number, flat_in_block, user_id } = flat;
 
+    const handleFlatCard = (id) => {
+        setFlatId(id);
+        getFlatResidentData(flatId)
+    };
+
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card onClick={() => handleFlatCard(flat._id)} sx={{ maxWidth: 345 }}>
             <CardActionArea>
                 <CardMedia
                     component='img'
