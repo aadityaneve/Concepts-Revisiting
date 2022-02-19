@@ -66,7 +66,14 @@ router.get('/', async (req, res) => {
             const flat = await Flat.find({ flat_type: filterType })
                 .skip(offset)
                 .limit(size)
-                .sort({ flat_number: sort === 'asc' || sort === 1 ? 1 : -1 })
+                .sort({
+                    flat_number:
+                        sort === 'asc' || sort === 1
+                            ? 1
+                            : sort === 'des' || sort === -1
+                            ? -1
+                            : 1,
+                })
                 .lean()
                 .exec();
 
@@ -109,7 +116,14 @@ router.get('/', async (req, res) => {
             const flat = await Flat.find({})
                 .skip(offset)
                 .limit(size)
-                .sort({ flat_number: sort === 'asc' || sort === 1 ? 1 : -1 })
+                .sort({
+                    flat_number:
+                        sort === 'asc' || sort === 1
+                            ? 1
+                            : sort === 'des' || sort === -1
+                            ? -1
+                            : 1,
+                })
                 .lean()
                 .exec();
 
