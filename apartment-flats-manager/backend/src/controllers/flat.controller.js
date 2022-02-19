@@ -103,6 +103,23 @@ router.get('/', async (req, res) => {
             return res
                 .status(200)
                 .send({ status: 'SUCCESS', flat, total_pages: totalPages });
+        } else if (page && size && sort) {
+            const offset = (page - 1) * size;
+
+            const flat = await Flat.find({})
+                .skip(offset)
+                .limit(size)
+                .sort({ flat_number: sort === 'asc' || sort === 1 ? 1 : -1 })
+                .lean()
+                .exec();
+
+            const totalPages = Math.ceil(
+                (await Flat.find({}).countDocuments().lean().exec()) / size
+            );
+
+            return res
+                .status(200)
+                .send({ status: 'SUCCESS', flat, total_pages: totalPages });
         } else if (page && size) {
             const offset = (page - 1) * size;
 
