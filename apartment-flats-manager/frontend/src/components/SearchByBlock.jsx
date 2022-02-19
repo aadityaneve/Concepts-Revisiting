@@ -17,7 +17,7 @@ const MenuProps = {
     },
 };
 
-const names = ['A', 'B', 'C', 'D', 'E'];
+const names = ['All', 'A', 'B', 'C', 'D', 'E'];
 
 function getStyles(name, block, theme) {
     return {
@@ -28,11 +28,7 @@ function getStyles(name, block, theme) {
     };
 }
 
-export default function SearchByBlock({
-    block,
-    setBlock,
-    setPage,
-}) {
+export default function SearchByBlock({ block, setBlock, setPage }) {
     const theme = useTheme();
 
     const handleChange = (event) => {
